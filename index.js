@@ -93,7 +93,16 @@ console.log(josh.toString());
   }
 
   Car.prototype.drive = function(distance){
+    const drivableMiles = this.tank * this.milesPerGallon;
 
+    if(distance > drivableMiles){
+      this.odometer = this.odometer + drivableMiles;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }else{
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance / this.milesPerGallon);
+    }
   }
 
 
@@ -110,6 +119,7 @@ console.log(josh.toString());
   jeep.fill(20);
 
   console.log(jeep.toString());
+  console.log(jeep.drive(250));
 
   
   /*
@@ -137,10 +147,10 @@ console.log(josh.toString());
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window Binding - when 'this' is not given context and is used in the global scope it's value will be bound to the window/console object
+    2. Implicit Binding - the most common usage of 'this' found, it means the context of 'this' is defined within an object method and whenever a function is called by a preceding dot '.' the object to the left of the dot gets 'this' 
+    3. New Binding - Whenever using a constructor function, 'this' is bound to a specific instance of the object that is created and returned by the constructor function. 
+    4. Explicit Binding - Whenever the call or apply method is used, 'this' is explicitly defined. 
   */
   
   
